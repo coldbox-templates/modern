@@ -20,6 +20,15 @@ component extends="coldbox.system.EventHandler" {
 		];
 	}
 
+
+	/**
+	 * error
+	 */
+	function error( event, rc, prc ){
+		event.settttView( "Main/error" );
+	}
+
+
 	/**
 	 * Relocation example
 	 */
