@@ -9,14 +9,13 @@
         "webroot":"www",
         "directoryBrowsing":true,
         "rewrites":{
-            "enable":"true"
+            "enable":true
         },
         "aliases":{
-            "/coldbox/system/exceptions":"lib/coldbox/system/exceptions",
-            "/testbox":"lib/testbox",
-            "/tests":"tests",
-            "/cbdebugger":"modules/cbdebugger"
-        },
-        "gzipEnable":true
+            "/cbdebugger":"../modules/cbdebugger/",
+            "/coldbox/system/exceptions":"../lib/coldbox/system/exceptions/",
+            "/testbox":"../lib/testbox/",
+            "/tests":"../tests/"
+        }
     }
 }
