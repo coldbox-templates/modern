@@ -17,7 +17,13 @@ component{
 	this.mappings[ "/tests" ] = getDirectoryFromPath( getCurrentTemplatePath() );
 	// Map back to its root
 	rootPath = REReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
-	this.mappings["/root"]   = rootPath;
+	// App Mappings
+	this.mappings[ "/www" ] = rootPath & "www";
+	this.mappings[ "/app" ] = rootPath & "app";
+	this.mappings[ "/lib" ] = rootPath & "lib";
+	this.mappings[ "/logs" ] = rootPath & "logs";
+	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
+	this.mappings[ "/modules" ] = rootPath & "modules";
 
 	public void function onRequestEnd() {
 
