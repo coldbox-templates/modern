@@ -19,5 +19,5 @@ yarn-error.log
 ## Libs
 lib/coldbox/*
 lib/testbox/*
-lib/modules/*
-lib/modules/**/apidocs/**
+modules/*
+modules/**/apidocs/**
