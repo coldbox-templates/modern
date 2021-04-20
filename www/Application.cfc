@@ -23,6 +23,7 @@ component {
 	rootPath = REReplaceNoCase( this.mappings[ "/www" ], "www(\\|/)", "" );
 	this.mappings[ "/app" ] = rootPath & "app";
 	this.mappings[ "/lib" ] = rootPath & "lib";
+	this.mappings[ "/logs" ] = rootPath & "logs";
 	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
 	this.mappings[ "/modules" ] = rootPath & "modules";
 
@@ -30,10 +31,13 @@ component {
 	COLDBOX_APP_ROOT_PATH = this.mappings[ "/app" ];
 	// The web server mapping to this application. Used for remote purposes or static purposes
 	COLDBOX_APP_MAPPING   = "app";
+	COLDBOX_WEB_MAPPING   = "";
 	// COLDBOX PROPERTIES
 	COLDBOX_CONFIG_FILE   = "";
 	// COLDBOX APPLICATION KEY OVERRIDE
 	COLDBOX_APP_KEY       = "";
+	// By default if an app is reiniting and a request hits it, we will fail fast with a message
+	COLDBOX_FAIL_FAST = true
 
 	// application start
 	public boolean function onApplicationStart() {
@@ -41,7 +45,9 @@ component {
 			COLDBOX_CONFIG_FILE,
 			COLDBOX_APP_ROOT_PATH,
 			COLDBOX_APP_KEY,
-			COLDBOX_APP_MAPPING
+			COLDBOX_APP_MAPPING,
+			COLDBOX_FAIL_FAST,
+			COLDBOX_WEB_MAPPING
 		);
 		application.cbBootstrap.loadColdbox();
 		return true;

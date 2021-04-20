@@ -3,6 +3,12 @@ component {
 	function configure() {
 		// Set Full Rewrites
 		setFullRewrites( true );
+		// Set Full Web HTTP Root
+		setBaseUrl( "http://#cgi.http_host#/" );
+		// Turn off domain discovery so we only server from one domain.
+		// If you enable this, then you will need to override the base url on each request
+		// Via a requestCapture() interceptor
+		setMultiDomainDiscovery( false );
 
 		/**
 		 * --------------------------------------------------------------------------

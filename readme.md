@@ -1,6 +1,6 @@
-# Advanced Script Template
+# Modern Organization Template
 
-An advanced template with all the bells and whistles in script format
+This template is a work in progress where we are testing a different approach to ColdBox tempaltes.
 
 ## License
 
@@ -10,7 +10,7 @@ Apache License, Version 2.0.
 
 Source Code
 
-- https://github.com/coldbox-templates/advanced-script
+- https://github.com/coldbox-templates/modern
 
 ## Quick Installation
 

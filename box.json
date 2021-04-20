@@ -25,12 +25,10 @@
     },
     "installPaths":{
         "coldbox":"lib/coldbox/",
-        "testbox":"lib/testbox/",
-        "cbdebugger":"modules/cbdebugger/"
+        "testbox":"lib/testbox/"
     },
     "dependencies":{
-        "coldbox":"^6.0.0",
-        "cbdebugger":"^3.0.0+142"
+        "coldbox":"^6.0.0"
     },
     "scripts":{
         "postPublish":"!git push --follow-tags",
