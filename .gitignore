@@ -1,0 +1,23 @@
+# General Ignores + IDE
+.DS_Store
+settings.xml
+WEB-INF
+.env
+
+# Deployed Engines
+.engine/**
+
+# logs + tests
+logs/**
+tests/results/**
+
+# npm
+**/node_modules/*
+npm-debug.log
+yarn-error.log
+
+## Libs
+lib/coldbox/*
+lib/testbox/*
+lib/modules/*
+lib/modules/**/apidocs/**

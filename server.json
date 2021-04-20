@@ -1,0 +1,22 @@
+{
+    "app":{
+        "serverHomeDirectory":".engine/"
+    },
+    "JVM":{
+        "heapSize":"512"
+    },
+    "web":{
+        "webroot":"www",
+        "directoryBrowsing":true,
+        "rewrites":{
+            "enable":"true"
+        },
+        "aliases":{
+            "/coldbox/system/exceptions":"lib/coldbox/system/exceptions",
+            "/testbox":"lib/testbox",
+            "/tests":"tests",
+            "/cbdebugger":"modules/cbdebugger"
+        },
+        "gzipEnable":true
+    }
+}
