@@ -1,6 +1,8 @@
 # Modern Organization Template
 
-This template is a work in progress where we are testing a different approach to ColdBox tempaltes.
+This template is a work in progress where we are testing a different approach to ColdBox templates.
+Instead of having all files in the web root, this template only puts browsable files in the web root. 
+If you are using CommandBox, everything should "just work" but if you want to run this behind IIS/Apache, etc you'll need to re-create the web server aliases that are in the `server.json`.
 
 ## License
 

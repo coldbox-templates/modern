@@ -23,6 +23,7 @@ component{
 	this.mappings[ "/lib" ] = rootPath & "lib";
 	this.mappings[ "/logs" ] = rootPath & "logs";
 	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
+	this.mappings[ "/testbox" ] = this.mappings[ "/lib" ] & "/testbox";
 	this.mappings[ "/modules" ] = rootPath & "modules";
 
 	public void function onRequestEnd() {
