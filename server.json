@@ -1,8 +1,5 @@
 {
     "cfconfigFile":".cfconfig.json",
-    "app":{
-        "serverHomeDirectory":".engine/"
-    },
     "JVM":{
         "heapSize":"512"
     },
