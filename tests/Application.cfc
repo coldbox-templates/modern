@@ -19,11 +19,11 @@ component{
 	rootPath = REReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
 	// App Mappings
 	this.mappings[ "/www" ] = rootPath & "www";
-	this.mappings[ "/app" ] = rootPath & "app";
+	this.mappings[ "/app" ] =  rootPath & "app";
 	this.mappings[ "/lib" ] = rootPath & "lib";
 	this.mappings[ "/logs" ] = rootPath & "logs";
-	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
-	this.mappings[ "/testbox" ] = this.mappings[ "/lib" ] & "/testbox";
+	this.mappings[ "/coldbox" ] = rootPath & "/vendor/coldbox";
+	this.mappings[ "/testbox" ] = rootPath & "/vendor/testbox";
 	this.mappings[ "/modules" ] = rootPath & "modules";
 
 	public void function onRequestEnd() {

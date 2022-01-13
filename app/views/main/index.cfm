@@ -108,16 +108,16 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="#getSetting( "appMapping" )#/tests/runner.cfm">
-							#getSetting( "appMapping" )#runner.cfm
+						<a href="/tests/runner.cfm">
+							runner.cfm
 						</a>
 					</td>
 					<td>A TestBox runner so you can execute your tests.</td>
 				</tr>
 				<tr>
 					<td>
-						<a href="#getSetting( "appMapping" )#/tests/index.cfm">
-							#getSetting( "appMapping" )#index.cfm
+						<a href="/tests/index.cfm">
+							index.cfm
 						</a>
 					</td>
 					<td>A TestBox browser, so you can browse and execute specs</td>

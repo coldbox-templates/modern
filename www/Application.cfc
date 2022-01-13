@@ -13,24 +13,29 @@ component {
 
 	// Java Integration
 	this.javaSettings = {
-		loadPaths               : [ expandPath( "../lib/jars" ) ],
+		loadPaths               : [ expandPath( "../lib" ) ],
 		loadColdFusionClassPath : true,
 		reloadOnChange          : false
 	};
 
-	// Create app + lib + module mappings
+	// webroot + Includes
 	this.mappings[ "/www" ] = getDirectoryFromPath( getCurrentTemplatePath() );
+	this.mappings[ "/includes" ] = this.mappings[ "/www" ] & "includes";
+	// app root
 	rootPath = REReplaceNoCase( this.mappings[ "/www" ], "www(\\|/)", "" );
+	// app core
 	this.mappings[ "/app" ] = rootPath & "app";
-	this.mappings[ "/lib" ] = rootPath & "lib";
+	// logs
 	this.mappings[ "/logs" ] = rootPath & "logs";
-	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
+	// coldbox
+	this.mappings[ "/coldbox" ] = rootPath & "vendor/coldbox";
+	// Modules
 	this.mappings[ "/modules" ] = rootPath & "modules";
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = this.mappings[ "/app" ];
 	// The web server mapping to this application. Used for remote purposes or static purposes
-	COLDBOX_APP_MAPPING   = "app";
+	COLDBOX_APP_MAPPING   = "/app";
 	COLDBOX_WEB_MAPPING   = "";
 	// COLDBOX PROPERTIES
 	COLDBOX_CONFIG_FILE   = "";
@@ -60,6 +65,12 @@ component {
 
 	// request start
 	public boolean function onRequestStart( string targetPage ) {
+
+		if ( url.keyExists( "appreinit" ) ){
+			structdelete( application, "cbBootstrap" );
+			onApplicationStart();
+		}
+
 		// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 

@@ -13,8 +13,9 @@
             "enable":true
         },
         "aliases":{
-            "/coldbox/system/exceptions":"../lib/coldbox/system/exceptions/",
-            "/testbox":"../lib/testbox/",
+            "/modules/cbdebugger":"../modules/cbdebugger",
+            "/coldbox/system/exceptions":"../vendor/coldbox/system/exceptions/",
+            "/testbox":"../vendor/testbox/",
             "/tests":"../tests/"
         }
     }

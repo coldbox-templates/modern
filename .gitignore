@@ -1,13 +1,11 @@
 # General Ignores + IDE
 .DS_Store
-settings.xml
-WEB-INF
 .env
 
 # Deployed Engines
 .engine/**
 
-# logs + tests
+# logs + test results
 logs/**
 tests/results/**
 
@@ -17,7 +15,6 @@ npm-debug.log
 yarn-error.log
 
 ## Libs
-lib/coldbox/*
-lib/testbox/*
+vendor/**
 modules/*
 modules/**/apidocs/**
