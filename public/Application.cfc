@@ -6,7 +6,7 @@
 component {
 
 	// Application properties
-	this.name              = hash( getCurrentTemplatePath() );
+	this.name              = "ColdBox App - " & hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
 	this.sessionTimeout    = createTimespan( 0, 0, 30, 0 );
 	this.setClientCookies  = true;
@@ -18,24 +18,26 @@ component {
 		reloadOnChange          : false
 	};
 
-	// webroot + Includes
-	this.mappings[ "/www" ] = getDirectoryFromPath( getCurrentTemplatePath() );
-	this.mappings[ "/includes" ] = this.mappings[ "/www" ] & "includes";
-	// app root
-	rootPath = REReplaceNoCase( this.mappings[ "/www" ], "www(\\|/)", "" );
-	// app core
+	// Public Root Mapping
+	this.mappings[ "/root" ] = getDirectoryFromPath( getCurrentTemplatePath() );
+	// Public Includes
+	this.mappings[ "/includes" ] = this.mappings[ "/root" ] & "includes";
+	// Outside the Root Path
+	rootPath = REReplaceNoCase( this.mappings[ "/root" ], "public(\\|/)", "" );
+	// ColdBox App core
 	this.mappings[ "/app" ] = rootPath & "app";
-	// logs
+	// Logs
 	this.mappings[ "/logs" ] = rootPath & "logs";
-	// coldbox
-	this.mappings[ "/coldbox" ] = rootPath & "vendor/coldbox";
+	// ColdBox
+	this.mappings[ "/coldbox" ] = rootPath & "coldbox";
 	// Modules
 	this.mappings[ "/modules" ] = rootPath & "modules";
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = this.mappings[ "/app" ];
-	// The web server mapping to this application. Used for remote purposes or static purposes
+	// THE MAPPING LOCATION OF THE COLDBOX CORE APP
 	COLDBOX_APP_MAPPING   = "/app";
+	// THE WEB PATH LOCATION OF THE PUBLIC ASSETS, EMPTY FOR THE ROOT.
 	COLDBOX_WEB_MAPPING   = "";
 	// COLDBOX PROPERTIES
 	COLDBOX_CONFIG_FILE   = "";

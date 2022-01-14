@@ -18,13 +18,13 @@ component{
 	// Map back to its root
 	rootPath = REReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
 	// App Mappings
-	this.mappings[ "/www" ] = rootPath & "www";
 	this.mappings[ "/app" ] =  rootPath & "app";
+	this.mappings[ "/coldbox" ] = rootPath & "coldbox";
 	this.mappings[ "/lib" ] = rootPath & "lib";
 	this.mappings[ "/logs" ] = rootPath & "logs";
-	this.mappings[ "/coldbox" ] = rootPath & "/vendor/coldbox";
-	this.mappings[ "/testbox" ] = rootPath & "/vendor/testbox";
 	this.mappings[ "/modules" ] = rootPath & "modules";
+	this.mappings[ "/testbox" ] = rootPath & "testbox";
+	this.mappings[ "/root" ] = rootPath & "public";
 
 	public void function onRequestEnd() {
 

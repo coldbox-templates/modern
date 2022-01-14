@@ -1,4 +1,5 @@
 {
+	"name":"ColdBox-Rocks!",
     "cfconfigFile":".cfconfig.json",
     "app":{
         "serverHomeDirectory":".engine/"
@@ -7,15 +8,14 @@
         "heapSize":"512"
     },
     "web":{
-        "webroot":"www",
-        "directoryBrowsing":true,
+        "webroot":"public",
         "rewrites":{
             "enable":true
         },
         "aliases":{
             "/modules/cbdebugger":"../modules/cbdebugger",
-            "/coldbox/system/exceptions":"../vendor/coldbox/system/exceptions/",
-            "/testbox":"../vendor/testbox/",
+            "/coldbox/system/exceptions":"../coldbox/system/exceptions/",
+            "/testbox":"../testbox/",
             "/tests":"../tests/"
         }
     }

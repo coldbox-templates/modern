@@ -15,6 +15,7 @@ npm-debug.log
 yarn-error.log
 
 ## Libs
-vendor/**
+coldbox/**
+testbox/**
 modules/*
 modules/**/apidocs/**
