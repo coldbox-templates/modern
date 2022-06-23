@@ -11,13 +11,6 @@ component {
 	this.sessionTimeout    = createTimespan( 0, 0, 30, 0 );
 	this.setClientCookies  = true;
 
-	// Java Integration
-	this.javaSettings = {
-		loadPaths               : [ expandPath( "../lib" ) ],
-		loadColdFusionClassPath : true,
-		reloadOnChange          : false
-	};
-
 	// Public Root Mapping
 	this.mappings[ "/root" ] = getDirectoryFromPath( getCurrentTemplatePath() );
 	// Public Includes
@@ -26,12 +19,21 @@ component {
 	rootPath = REReplaceNoCase( this.mappings[ "/root" ], "public(\\|/)", "" );
 	// ColdBox App core
 	this.mappings[ "/app" ] = rootPath & "app";
+	// Libs
+	this.mappings[ "/lib" ] = rootPath & "lib";
 	// Logs
 	this.mappings[ "/logs" ] = rootPath & "logs";
 	// ColdBox
-	this.mappings[ "/coldbox" ] = rootPath & "coldbox";
+	this.mappings[ "/coldbox" ] = rootPath & "lib/coldbox";
 	// Modules
 	this.mappings[ "/modules" ] = rootPath & "modules";
+
+	// Java Integration
+	this.javaSettings = {
+		loadPaths               : [ this.mappings[ "/lib" ] ],
+		loadColdFusionClassPath : true,
+		reloadOnChange          : false
+	};
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = this.mappings[ "/app" ];
