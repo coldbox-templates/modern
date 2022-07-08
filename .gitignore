@@ -1,4 +1,4 @@
-# General Ignores + IDE
+# General Ignores + IDE + Secrets
 .DS_Store
 .env
 
@@ -14,8 +14,11 @@ tests/results/**
 npm-debug.log
 yarn-error.log
 
-## Libs
-coldbox/**
-testbox/**
+## Global Libs
+lib/coldbox/**
+lib/testbox/**
+lib/vendor/**
+
+# Modules
 modules/*
 modules/**/apidocs/**
