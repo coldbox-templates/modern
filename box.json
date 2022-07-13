@@ -25,9 +25,9 @@
         "commandbox-cfformat":"*"
     },
     "installPaths":{
-        "coldbox":"coldbox/",
+        "coldbox":"lib/coldbox/",
         "cbdebugger":"modules/cbdebugger/",
-        "testbox":"testbox/"
+        "testbox":"lib/testbox/"
     },
     "scripts":{
         "postPublish":"!git push --follow-tags",

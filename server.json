@@ -1,9 +1,5 @@
 {
-	"name":"ColdBox-Rocks!",
-    "cfconfigFile":".cfconfig.json",
-    "app":{
-        "serverHomeDirectory":".engine/"
-    },
+    "name":"ColdBoxRocks",
     "JVM":{
         "heapSize":"512"
     },
