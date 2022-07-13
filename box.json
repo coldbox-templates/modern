@@ -31,7 +31,7 @@
     },
     "scripts":{
         "postPublish":"!git push --follow-tags",
-        "postInstall":"pathExists .env || cp env.example .env && mv env.example .env.example",
+        "postInstall":"pathExists .env || cp .env.example .env",
         "format":"cfformat run app/**/*.cfc,tests/specs/,*.cfc --overwrite",
         "format:check":"cfformat check app/**/*.cfc,tests/specs/,*.cfc ./.cfformat.json",
         "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'"
