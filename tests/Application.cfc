@@ -19,13 +19,13 @@ component{
 	// Map back to its root
 	rootPath = REReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
 	// App Mappings
-	this.mappings[ "/app" ] =  rootPath & "app";
-	this.mappings[ "/coldbox" ] = rootPath & "coldbox";
-	this.mappings[ "/lib" ] = rootPath & "lib";
-	this.mappings[ "/logs" ] = rootPath & "logs";
+	this.mappings[ "/app" ]     = rootPath & "app";
+	this.mappings[ "/lib" ]     = rootPath & "lib";
+	this.mappings[ "/logs" ]    = rootPath & "logs";
 	this.mappings[ "/modules" ] = rootPath & "modules";
-	this.mappings[ "/testbox" ] = rootPath & "testbox";
-	this.mappings[ "/root" ] = rootPath & "public";
+	this.mappings[ "/root" ]    = rootPath & "public";
+	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
+	this.mappings[ "/testbox" ] = this.mappings[ "/lib" ] & "/testbox";
 
 	public boolean function onRequestStart( targetPage ){
 		// Set a high timeout for long running tests
