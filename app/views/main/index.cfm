@@ -116,7 +116,7 @@
 
 					<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 						<a
-							href="#getSetting( "appMapping" )#/tests/index.cfm"
+							href="/tests/index.cfm"
 							class="btn btn-dark btn-lg"
 							role="button"
 							target="_blank"
@@ -126,7 +126,7 @@
 						</a>
 
 						<a
-							href="#getSetting( "appMapping" )#/tests/runner.cfm"
+							href="/tests/runner.cfm"
 							class="btn btn-dark btn-lg"
 							role="button"
 							target="_blank"
