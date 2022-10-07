@@ -1,7 +1,7 @@
 {
     "name":"ColdBox Modern APP Template",
     "shortDescription":"",
-    "version":"1.5.0",
+    "version":"1.6.0",
     "author":"You",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
@@ -35,8 +35,8 @@
         "format":"cfformat run app/**/*.cfc,tests/specs/,*.cfc --overwrite",
         "format:check":"cfformat check app/**/*.cfc,tests/specs/,*.cfc ./.cfformat.json",
         "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'",
-		"build:docker":"!docker build --no-cache -t my-coldbox-app -f ./Dockerfile ./",
-		"run:docker": "!docker run -it -p 8080:8080 my-coldbox-app"
+        "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./Dockerfile ./",
+        "run:docker":"!docker run -it -p 8080:8080 my-coldbox-app"
     },
     "testbox":{
         "runner":"/tests/runner.cfm"
