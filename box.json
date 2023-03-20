@@ -1,7 +1,7 @@
 {
     "name":"ColdBox Modern APP Template",
     "shortDescription":"",
-    "version":"7.0.0",
+    "version":"7.0.0-snapshot",
     "author":"You",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
@@ -30,7 +30,7 @@
         "testbox":"lib/testbox/"
     },
     "scripts":{
-        "postPublish":"!git push --follow-tags",
+        "postPublish":"!git push origin --tags",
         "postInstall":"pathExists .env || cp .env.example .env",
         "format":"cfformat run app/**/*.cfc,tests/specs/,*.cfc --overwrite",
         "format:check":"cfformat check app/**/*.cfc,tests/specs/,*.cfc ./.cfformat.json",

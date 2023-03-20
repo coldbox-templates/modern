@@ -136,10 +136,10 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li>
-										<a class="dropdown-item" href="https://boxteam.herokuapp.com">Slack</a>
+										<a class="dropdown-item" href="https://boxteam.ortussolutions.com">Slack</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="https://groups.google.com/group/coldbox">Mailing List</a>
+										<a class="dropdown-item" href="https://community.ortussolutions.com/c/communities/coldbox/13">Mailing List</a>
 									</li>
 									<li>
 										<a class="dropdown-item" href="https://www.coldbox.org/support/overview">Community Support</a>
