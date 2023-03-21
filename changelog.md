@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* New automated changelogs
+* Workflow updates for autocommit formatting and pr formatting checks
+
 ## [1.0.0] => 2021-JAN-01
 
 * First iteration of this module
