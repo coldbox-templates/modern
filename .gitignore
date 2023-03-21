@@ -1,9 +1,13 @@
-# General Ignores + IDE + Secrets
+# General Ignores + IDE
 .DS_Store
-.env
+settings.xml
+WEB-INF
 
-# Deployed Engines
+# Engines + Database + CBFS + Secrets
+.env
 .engine/**
+.cbfs/**
+build/.db/**
 
 # logs + test results
 logs/**
@@ -20,5 +24,4 @@ lib/testbox/**
 lib/vendor/**
 
 # Modules
-modules/*
-modules/**/apidocs/**
+modules/**
