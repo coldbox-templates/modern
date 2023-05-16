@@ -1,7 +1,7 @@
 {
     "name":"ColdBox Modern APP Template",
     "shortDescription":"",
-    "version":"6.9.0",
+    "version":"7.0.0-snapshot",
     "author":"You",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
@@ -13,13 +13,16 @@
         "url":""
     },
     "contributors":[],
-    "ignore":[],
+    "ignore":[
+		"changelog.md",
+        ".github/**"
+	],
     "dependencies":{
         "coldbox":"be",
         "cbdebugger":"^3.2.0+5"
     },
     "devDependencies":{
-        "testbox":"*",
+        "testbox":"be",
         "commandbox-dotenv":"*",
         "commandbox-cfconfig":"*",
         "commandbox-cfformat":"*"
