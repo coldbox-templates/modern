@@ -1,6 +1,6 @@
 component {
 
-	function configure() {
+	function configure(){
 		// Set Full Rewrites
 		setFullRewrites( true );
 		// Set Full Web HTTP Root
@@ -21,21 +21,18 @@ component {
 		 */
 
 		// A nice healthcheck route example
-		route( "/healthcheck", function( event, rc, prc ) {
+		route( "/healthcheck", function( event, rc, prc ){
 			return "Ok!";
 		} );
 
 		// A nice RESTFul Route example
-		route( "/api/echo", function( event, rc, prc ) {
-			return {
-				"error" : false,
-				"data"  : "Welcome to my awesome API!"
-			};
+		route( "/api/echo", function( event, rc, prc ){
+			return { "error" : false, "data" : "Welcome to my awesome API!" };
 		} );
 
 		// @app_routes@
 
-// Conventions-Based Routing
+		// Conventions-Based Routing
 		route( ":handler/:action?" ).end();
 	}
 
