@@ -3,7 +3,7 @@ component {
 	/**
 	 * Configure the ColdBox App For Production
 	 */
-	function configure() {
+	function configure(){
 		/**
 		 * --------------------------------------------------------------------------
 		 * ColdBox Directives
@@ -33,9 +33,7 @@ component {
 			// Extension Points
 			applicationHelper        : "/app/helpers/ApplicationHelper.cfm",
 			viewsHelper              : "",
-			modulesExternalLocation  : [
-				"/modules"
-			],
+			modulesExternalLocation  : [ "/modules" ],
 			viewsExternalLocation    : "",
 			layoutsExternalLocation  : "",
 			handlersExternalLocation : "",
@@ -99,15 +97,15 @@ component {
 			// Define Appenders
 			appenders : {
 				consolelog : { class : "coldbox.system.logging.appenders.ConsoleAppender" },
-				filelog : {
-					class : "coldbox.system.logging.appenders.RollingFileAppender",
+				filelog    : {
+					class      : "coldbox.system.logging.appenders.RollingFileAppender",
 					properties : { filename : "app", filePath : "/logs" }
 				}
 			},
 			// Root Logger
-			root      : { levelmax : "INFO", appenders : "*" },
+			root : { levelmax : "INFO", appenders : "*" },
 			// Implicit Level Categories
-			info      : [ "coldbox.system" ]
+			info : [ "coldbox.system" ]
 		};
 
 		/**
@@ -179,24 +177,24 @@ component {
 	/**
 	 * Development environment
 	 */
-	function development() {
+	function development(){
 		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm"; // interactive bug report
 
 		// Debugger Settings
 		variables.modulesettings.cbdebugger = {
 			// This flag enables/disables the tracking of request data to our storage facilities
 			// To disable all tracking, turn this master key off
-			enabled   : true,
+			enabled        : true,
 			// This setting controls if you will activate the debugger for visualizations ONLY
 			// The debugger will still track requests even in non debug mode.
-			debugMode : true,
+			debugMode      : true,
 			// The URL password to use to activate it on demand
 			debugPassword  : "cb",
 			// Request Tracker Options
 			requestTracker : {
 				storage                      : "cachebox",
 				cacheName                    : "template",
-				trackDebuggerEvents : false,
+				trackDebuggerEvents          : false,
 				// Expand by default the tracker panel or not
 				expanded                     : false,
 				// Slow request threshold in milliseconds, if execution time is above it, we mark those transactions as red
@@ -259,10 +257,7 @@ component {
 				// Log the binding parameters
 				logParams : true
 			},
-			async : {
-				enabled : true,
-				expanded : false
-			}
+			async : { enabled : true, expanded : false }
 		};
 	}
 
