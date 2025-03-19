@@ -22,9 +22,8 @@
         "cbdebugger":"^4.3.0+5"
     },
     "devDependencies":{
-        "testbox":"^5.0.0",
-        "commandbox-dotenv":"*",
-        "commandbox-cfconfig":"*",
+        "testbox":"^6.0.0",
+        "commandbox-boxlang":"*",
         "commandbox-cfformat":"*"
     },
     "installPaths":{
