@@ -9,10 +9,10 @@
             "enable":true
         },
         "aliases":{
-            "/modules/cbdebugger":"../modules/cbdebugger",
-            "/coldbox/system/exceptions":"../coldbox/system/exceptions/",
-            "/testbox":"../testbox/",
-            "/tests":"../tests/"
+            "/modules/cbdebugger":"./modules/cbdebugger",
+            "/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
+            "/testbox":"./lib/testbox/",
+            "/tests":"./tests/"
         }
     }
 }
