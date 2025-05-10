@@ -8,13 +8,13 @@ If you are using CommandBox, everything should "just work" but if you want to ru
 ## Structure
 
 * `app` - Location of the ColdBox CFML app (Handlers, config, interceptors, views, custom modules, etc.)
-* `coldbox` - ColdBox libs
-* `lib` - Java libs
+* `lib` - Java and framework libs
+* `lib/coldbox` - ColdBox libs
+* `lib/testbox` - TestBox libs
 * `logs` - App and Server logs
 * `modules` - CommandBox installed ColdBox modules
 * `public` - Public webroot (UI assets, etc)
 * `resources` - Migrations, apidocs, UI source assets
-* `testbox` - TestBox libs
 * `tests` - Tests
 
 ## Aliases
@@ -24,13 +24,13 @@ Everything is locked down by default. Any modules you install that require UI as
 ```js
 "aliases":{
 	// We expose the cbdebugger module
-	"/modules/cbdebugger":"../modules/cbdebugger",
+	"/modules/cbdebugger":"./modules/cbdebugger",
 	// We expose the ColdBox Exceptions UI
-	"/coldbox/system/exceptions":"../coldbox/system/exceptions/",
+	"/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
 	// Expose TestBox for testing purposes
-	"/testbox":"../testbox/",
+	"/testbox":"./lib/testbox/",
 	// Expose Tests for testing purposes
-	"/tests":"../tests/"
+	"/tests":"./tests/"
 }
 ```
 
