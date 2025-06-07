@@ -1,6 +1,7 @@
 # General Ignores + IDE + Secrets
 .DS_Store
 .env
+effective-pom.xml
 
 # Deployed Engines
 .engine/**
@@ -15,10 +16,4 @@ npm-debug.log
 yarn-error.log
 
 ## Global Libs
-lib/coldbox/**
-lib/testbox/**
-lib/vendor/**
-
-# Modules
-modules/*
-modules/**/apidocs/**
+lib/**

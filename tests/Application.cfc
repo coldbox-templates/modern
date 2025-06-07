@@ -22,7 +22,7 @@ component{
 	this.mappings[ "/app" ]     = rootPath & "app";
 	this.mappings[ "/lib" ]     = rootPath & "lib";
 	this.mappings[ "/logs" ]    = rootPath & "logs";
-	this.mappings[ "/modules" ] = rootPath & "modules";
+	this.mappings[ "/modules" ] = rootPath & "lib/modules";
 	this.mappings[ "/root" ]    = rootPath & "public";
 	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
 	this.mappings[ "/testbox" ] = this.mappings[ "/lib" ] & "/testbox";

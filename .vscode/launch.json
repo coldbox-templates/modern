@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "Debug CommandBox",
+      "type": "boxlang",
+      "request": "attach",
+       // make sure this is the same value you configured your server with
+      "serverPort": 8888
+    }
+  ]
+}

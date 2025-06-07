@@ -3,13 +3,16 @@
     "JVM":{
         "heapSize":"512"
     },
+    "app":{
+        "logDir":"./logs"
+    },
     "web":{
         "webroot":"public",
         "rewrites":{
             "enable":true
         },
         "aliases":{
-            "/modules/cbdebugger":"./modules/cbdebugger",
+            "/modules/cbdebugger":"./lib/modules/cbdebugger",
             "/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
             "/testbox":"./lib/testbox/",
             "/tests":"./tests/"

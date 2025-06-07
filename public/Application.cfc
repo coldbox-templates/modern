@@ -6,7 +6,7 @@
 component {
 
 	// Application properties
-	this.name              = "ColdBox App - " & hash( getCurrentTemplatePath() );
+	this.name              = "ColdBox Application";
 	this.sessionManagement = true;
 	this.sessionTimeout    = createTimespan( 0, 0, 30, 0 );
 	this.setClientCookies  = true;
@@ -15,7 +15,7 @@ component {
 	this.mappings[ "/root" ] = getDirectoryFromPath( getCurrentTemplatePath() );
 	// Public Includes
 	this.mappings[ "/includes" ] = this.mappings[ "/root" ] & "includes";
-	// Outside the Root Path
+	// Outside the Root Path, one back
 	rootPath = REReplaceNoCase( this.mappings[ "/root" ], "public(\\|/)", "" );
 	// ColdBox App core
 	this.mappings[ "/app" ] = rootPath & "app";
@@ -24,13 +24,13 @@ component {
 	// Logs
 	this.mappings[ "/logs" ] = rootPath & "logs";
 	// ColdBox
-	this.mappings[ "/coldbox" ] = rootPath & "lib/coldbox";
+	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
 	// Modules
-	this.mappings[ "/modules" ] = rootPath & "modules";
+	this.mappings[ "/modules" ] = this.mappings[ "/lib" ] & "/modules";
 
 	// Java Integration
 	this.javaSettings = {
-		loadPaths               : [ this.mappings[ "/lib/java" ] ],
+		loadPaths               : [ expandPath( "/lib/java" ) ],
 		loadColdFusionClassPath : true,
 		reloadOnChange          : false
 	};

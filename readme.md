@@ -7,15 +7,17 @@ If you are using CommandBox, everything should "just work" but if you want to ru
 
 ## Structure
 
-* `app` - Location of the ColdBox CFML app (Handlers, config, interceptors, views, custom modules, etc.)
-* `lib` - Java and framework libs
-* `lib/coldbox` - ColdBox libs
-* `lib/testbox` - TestBox libs
-* `logs` - App and Server logs
-* `modules` - CommandBox installed ColdBox modules
-* `public` - Public webroot (UI assets, etc)
-* `resources` - Migrations, apidocs, UI source assets
-* `tests` - Tests
+* `.vscode` - VSCode Helper files
+* `/app` - Location of the ColdBox  application (Handlers, config, interceptors, views, custom modules, etc.)
+* `/lib` - Java and framework libs
+  * `/java` - Java libs (JARs)
+  * `/coldbox` - ColdBox libs
+  * `/modules` - CommandBox installed ColdBox modules
+  * `/testbox` - TestBox libs
+* `/logs` - ColdBox and Server logs
+* `/public` - Public webroot (UI assets, etc)
+* `/resources` - Migrations, apidocs, UI source assets
+* `/tests` - Tests
 
 ## Aliases
 
