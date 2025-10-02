@@ -1,8 +1,6 @@
 component {
 
 	function configure(){
-		// Set Full Rewrites
-		setFullRewrites( true );
 		// Set Full Web HTTP Root
 		setBaseUrl( "http://#cgi.http_host#/" );
 		// Turn off domain discovery so we only server from one domain.
