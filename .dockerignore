@@ -2,5 +2,8 @@
 .engine
 .github
 .vscode
+.DS_Store
+.dockerignore
 lib/testbox
+resources
 tests

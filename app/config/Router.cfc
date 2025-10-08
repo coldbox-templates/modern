@@ -1,21 +1,12 @@
 component {
 
 	function configure(){
-		// Set Full Web HTTP Root
-		setBaseUrl( "http://#cgi.http_host#/" );
-		// Turn off domain discovery so we only server from one domain.
-		// If you enable this, then you will need to override the base url on each request
-		// Via a requestCapture() interceptor
-		setMultiDomainDiscovery( false );
-
 		/**
 		 * --------------------------------------------------------------------------
 		 * App Routes
 		 * --------------------------------------------------------------------------
-		 *
 		 * Here is where you can register the routes for your web application!
 		 * Go get Funky!
-		 *
 		 */
 
 		// A nice healthcheck route example
