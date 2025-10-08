@@ -18,7 +18,7 @@
         ".github/**"
 	],
     "dependencies":{
-        "coldbox":"^7.0.0",
+        "coldbox":"be",
         "cbdebugger":"^4.3.0+5"
     },
     "devDependencies":{
