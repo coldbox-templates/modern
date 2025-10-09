@@ -56,34 +56,34 @@ This template **requires** CommandBox aliases in `server.json` to expose interna
 
 ```cfml
 component extends="coldbox.system.EventHandler" {
-    
+
     // All actions receive three arguments:
     // - event: RequestContext object
     // - rc: Request collection (form/URL variables)
     // - prc: Private request collection (handler-to-view data)
-    
+
     function index(event, rc, prc){
         prc.welcomeMessage = "Data for the view";
         event.setView("main/index");
     }
-    
+
     // RESTful data - return any data type, ColdBox handles marshalling
     function data(event, rc, prc){
         return [
             { "id": createUUID(), "name": "Luis" }
         ];
     }
-    
+
     // Relocations
     function doSomething(event, rc, prc){
         relocate("main.index"); // Internal redirect to event
     }
-    
+
     // Lifecycle handlers (optional)
     function onAppInit(event, rc, prc){}
     function onRequestStart(event, rc, prc){}
     function onRequestEnd(event, rc, prc){}
-    
+
     // Exception handling
     function onException(event, rc, prc){
         event.setHTTPHeader(statusCode = 500);
@@ -117,12 +117,12 @@ component {
         route("/healthcheck", function(event, rc, prc){
             return "Ok!";
         });
-        
+
         // RESTful resources
         route("/api/echo", function(event, rc, prc){
             return { "error": false, "data": "Welcome!" };
         });
-        
+
         // Conventions-based routing (keep at end)
         route(":handler/:action?").end();
     }
@@ -137,30 +137,30 @@ Tests extend `coldbox.system.testing.BaseTestCase` with `appMapping="/app"`:
 
 ```cfml
 component extends="coldbox.system.testing.BaseTestCase" appMapping="/app" {
-    
+
     function beforeAll(){
         super.beforeAll();
         // Global test setup
     }
-    
+
     function run(){
         describe("Main Handler", function(){
             beforeEach(function(currentSpec){
                 // CRITICAL: Call setup() to create fresh request context
                 setup();
             });
-            
+
             it("can render the homepage", function(){
                 var event = this.get("main.index");
                 expect(event.getValue(name="welcomeMessage", private=true))
                     .toBe("Welcome to ColdBox!");
             });
-            
+
             it("can handle POST requests", function(){
                 var event = this.post("main.data");
                 expect(event.getRenderedContent()).toBeJSON();
             });
-            
+
             it("can test relocations", function(){
                 var event = execute(event="main.doSomething");
                 expect(event.getValue("relocate_event", "")).toBe("main.index");
@@ -187,7 +187,7 @@ component {
     property name="wirebox" inject="wirebox";
     property name="cachebox" inject="cachebox";
     property name="logbox" inject="logbox";
-    
+
     function list(){
         return userService.getAll();
     }
