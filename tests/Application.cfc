@@ -37,6 +37,8 @@ component{
 	this.mappings[ "/testbox" ] = _root & "/lib/testbox";
 
 	public boolean function onRequestStart( targetPage ){
+		writeDump( var=this.mappings, top = 5, showUDFs = false );
+		abort;
 		// Set a high timeout for long running tests
 		setting requestTimeout="9999";
 		// New ColdBox Virtual Application Starter
