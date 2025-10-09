@@ -99,7 +99,7 @@ component {
 				consolelog : { class : "coldbox.system.logging.appenders.ConsoleAppender" },
 				filelog    : {
 					class      : "coldbox.system.logging.appenders.RollingFileAppender",
-					properties : { filename : "app", filePath : "/logs" }
+					properties : { filename : "app", filePath : "/app/logs" }
 				}
 			},
 			// Root Logger

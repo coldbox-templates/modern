@@ -13,7 +13,7 @@
         },
         "aliases":{
             "/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
-            "/tests":"./tests/"
+			"/testsbox":"./lib/testbox/"
         }
     },
     "cfconfig":{

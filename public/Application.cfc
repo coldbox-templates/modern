@@ -33,8 +33,6 @@ component {
 	this.mappings[ "/public" ]     = _publicRoot;
 	this.mappings[ "/app" ]     = _root & "app";
 	this.mappings[ "/coldbox" ]     = _root & "lib/coldbox";
-	this.mappings[ "/testbox" ]     = _root & "lib/testbox";
-	this.mappings[ "/tests" ]     = _root & "tests";
 	this.mappings[ "/modules" ]     = _root & "modules";
 
 	/**

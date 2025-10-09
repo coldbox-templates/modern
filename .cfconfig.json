@@ -13,11 +13,6 @@
             "type":"RAM"
         }
     },
-    "CFMappings":{
-		"/tests":{
-            "PHYSICAL":"./tests"
-        }
-    },
     "datasources":{
         "coldbox":{
             "bundleName":"${DB_BUNDLENAME}",
