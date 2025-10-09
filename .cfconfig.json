@@ -1,18 +1,6 @@
 {
     "cacheDefaultObject":"coldbox",
 	"adminPassword":"coldbox",
-    "caches":{
-        "coldbox":{
-            "class":"lucee.runtime.cache.ram.RamCache",
-            "custom":{
-                "timeToIdleSeconds":"1800",
-                "timeToLiveSeconds":"3600"
-            },
-            "readOnly":"false",
-            "storage":"true",
-            "type":"RAM"
-        }
-    },
     "datasources":{
         "coldbox":{
             "bundleName":"${DB_BUNDLENAME}",

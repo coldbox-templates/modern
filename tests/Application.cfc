@@ -54,9 +54,6 @@ component{
 
 		// ORM Reload for fresh results
 		if( structKeyExists( url, "fwreinit" ) ){
-			if( structKeyExists( server, "lucee" ) ){
-				pagePoolClear();
-			}
 			// ormReload();
 			request.coldBoxVirtualApp.restart();
 		}
