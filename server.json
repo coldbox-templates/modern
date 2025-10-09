@@ -6,7 +6,7 @@
         "args":"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
     },
     "app":{
-        "cfengine":"boxlang@1"
+        "cfengine":"boxlang@be"
     },
     "web":{
         "webroot":"public",
