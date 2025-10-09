@@ -31,11 +31,11 @@ component {
 	_root = reReplaceNoCase( _publicRoot, "(/|\\)public", "" );
 
 	this.mappings[ "/public" ]     = _publicRoot;
-	this.mappings[ "/app" ]     = _root & "/app";
-	this.mappings[ "/coldbox" ]     = _root & "/lib/coldbox";
-	this.mappings[ "/testbox" ]     = _root & "/lib/testbox";
-	this.mappings[ "/tests" ]     = _root & "/tests";
-	this.mappings[ "/modules" ]     = _root & "/modules";
+	this.mappings[ "/app" ]     = _root & "app";
+	this.mappings[ "/coldbox" ]     = _root & "lib/coldbox";
+	this.mappings[ "/testbox" ]     = _root & "lib/testbox";
+	this.mappings[ "/tests" ]     = _root & "tests";
+	this.mappings[ "/modules" ]     = _root & "modules";
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -56,7 +56,7 @@ component {
 	 * https://coldbox.ortusbooks.com/getting-started/configuration/bootstrapper-application.cfc
 	 */
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
-	COLDBOX_APP_ROOT_PATH = expandPath( "/app" )
+	COLDBOX_APP_ROOT_PATH = this.mappings[ "/app" ]
 	// THE MAPPING LOCATION OF THE COLDBOX CORE APP
 	COLDBOX_APP_MAPPING   = "/app"
 	// THE WEB PATH LOCATION OF THE PUBLIC ASSETS, USUALLY "/" FOR MOST APPS
