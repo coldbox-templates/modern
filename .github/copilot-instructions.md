@@ -1,42 +1,56 @@
 # ColdBox Modern Template - AI Coding Instructions
 
-This is a ColdBox HMVC framework template with a "modern" folder structure that separates application code from the public webroot. Use CFML/BoxLang with ColdBox 7+ conventions.
+This is a ColdBox HMVC framework template with a **security-first architecture** that separates application code (`/app`) from the public webroot (`/public`). Compatible with Adobe ColdFusion 2021+ and BoxLang 1.0+. **Lucee is NOT supported.**
 
 ## 🏗️ Architecture Overview
 
-**Key Design Decision**: Unlike traditional templates where everything lives in the webroot, this template uses `/public` as the document root with application code in `/app`. This requires CommandBox aliases or web server configuration to expose internal paths.
+**Critical Design Decision**: Unlike traditional templates where everything lives in the webroot, this template uses `/public` as the document root with application code in `/app` (outside webroot). This requires CommandBox aliases or web server configuration.
 
-### Critical Paths
+### Directory Structure
 
 ```
-/app/              - Application code (handlers, models, views, config)
-/public/           - Public webroot (index.cfm, static assets)
-  /Application.cfc - Entry point that maps to /app via COLDBOX_APP_ROOT_PATH
-/lib/              - Framework and dependency storage
-  /coldbox/        - ColdBox framework files
-  /testbox/        - TestBox testing framework
-  /java/           - Java JAR dependencies
-  /modules/        - CommandBox-installed modules
-/tests/            - Test suites
-/resources/        - Non-web resources (migrations, apidocs, assets)
+/app/                  - Application code (NOT web-accessible)
+├── Application.cfc   - Security barrier (contains only "abort;")
+├── config/           - Framework configuration
+│   ├── ColdBox.cfc  - Main framework settings
+│   └── Router.cfc   - URL routing definitions
+├── handlers/         - Event handlers (controllers)
+├── models/           - Service objects, business logic
+├── views/            - HTML templates
+├── layouts/          - Page layouts
+├── helpers/          - Application helper functions
+├── interceptors/     - Event interceptors
+└── modules/          - Application modules (HMVC)
+
+/public/               - Document root (web-accessible)
+├── Application.cfc   - Bootstrap that maps to /app
+├── index.cfm         - Front controller
+└── includes/         - Static assets (CSS, JS, images)
+
+/lib/                  - Framework dependencies
+├── coldbox/          - ColdBox framework
+└── testbox/          - TestBox testing framework
+
+/tests/                - Test suites
+└── specs/            - BDD test specifications
 ```
 
 ### Application Bootstrap Flow
 
 1. Request hits `/public/index.cfm`
-2. `/public/Application.cfc` sets critical mappings:
+2. `/public/Application.cfc` sets **critical mappings**:
    - `COLDBOX_APP_ROOT_PATH = this.mappings["/app"]`
    - `COLDBOX_APP_MAPPING = "/app"`
    - `COLDBOX_WEB_MAPPING = "/"` (or "/yourApp" for subfolders)
-3. ColdBox loads config from `/app/config/ColdBox.cfc`
+3. ColdBox loads `/app/config/ColdBox.cfc`
 4. Routes defined in `/app/config/Router.cfc`
 5. Handlers in `/app/handlers/` process requests
 
-**Security Note**: `/app/Application.cfc` contains only `abort;` to prevent direct web access to application code.
+**Security**: `/app/Application.cfc` contains only `abort;` to prevent direct web access.
 
-## 🔧 CommandBox Aliases (Critical for Operation)
+## 🚨 CommandBox Aliases (CRITICAL)
 
-This template **requires** CommandBox aliases in `server.json` to expose internal assets:
+This template **REQUIRES** CommandBox aliases in `server.json` to expose internal assets:
 
 ```json
 "web": {
@@ -48,105 +62,70 @@ This template **requires** CommandBox aliases in `server.json` to expose interna
 }
 ```
 
-**When adding modules with UI assets** (cbdebugger, cbswagger, etc.), you MUST add corresponding aliases or they won't load.
+**⚠️ CRITICAL**: When installing modules with UI assets (cbdebugger, cbswagger, etc.), you **MUST** add corresponding aliases or they won't load:
+
+```json
+"aliases": {
+    "/cbdebugger": "./modules/cbdebugger/",
+    "/cbswagger": "./modules/cbswagger/"
+}
+```
+
+**Common Issue**: Module returns 404 errors → Missing alias in `server.json`
 
 ## 📝 Handler Patterns
 
-### Standard Handler Structure
+All handlers extend `coldbox.system.EventHandler` and receive three arguments:
 
 ```cfml
 component extends="coldbox.system.EventHandler" {
 
-    // All actions receive three arguments:
-    // - event: RequestContext object
-    // - rc: Request collection (form/URL variables)
-    // - prc: Private request collection (handler-to-view data)
+    // Dependency injection
+    property name="userService" inject="UserService";
 
+    /**
+     * @event RequestContext - get/set values, rendering, redirects
+     * @rc    Request Collection - URL/FORM variables (untrusted)
+     * @prc   Private Request Collection - handler-to-view data (trusted)
+     */
     function index(event, rc, prc){
-        prc.welcomeMessage = "Data for the view";
+        prc.welcomeMessage = "Data for view";
         event.setView("main/index");
     }
 
-    // RESTful data - return any data type, ColdBox handles marshalling
+    // RESTful data - return any type
     function data(event, rc, prc){
-        return [
-            { "id": createUUID(), "name": "Luis" }
-        ];
+        return [{id: createUUID(), name: "Luis"}];
     }
 
-    // Relocations
+    // Relocations (redirects)
     function doSomething(event, rc, prc){
-        relocate("main.index"); // Internal redirect to event
+        relocate("main.index");
     }
 
     // Lifecycle handlers (optional)
     function onAppInit(event, rc, prc){}
     function onRequestStart(event, rc, prc){}
-    function onRequestEnd(event, rc, prc){}
-
-    // Exception handling
     function onException(event, rc, prc){
-        event.setHTTPHeader(statusCode = 500);
-        var exception = prc.exception; // Populated by ColdBox
+        event.setHTTPHeader(statusCode=500);
+        var exception = prc.exception;
     }
 }
 ```
 
-### Request Collection Conventions
-
-- **rc (Request Collection)**: Automatically populated with FORM/URL variables. Never trust this data - always validate.
-- **prc (Private Request Collection)**: Pass data from handlers to views/layouts. Not accessible from URL.
-
-Example:
-```cfml
-function show(event, rc, prc){
-    // rc.id comes from URL/FORM
-    prc.user = userService.get(rc.id ?: 0);
-    event.setView("users/show");
-}
-```
-
-## 🗺️ Routing Patterns
-
-In `/app/config/Router.cfc`:
-
-```cfml
-component {
-    function configure(){
-        // Named routes
-        route("/healthcheck", function(event, rc, prc){
-            return "Ok!";
-        });
-
-        // RESTful resources
-        route("/api/echo", function(event, rc, prc){
-            return { "error": false, "data": "Welcome!" };
-        });
-
-        // Conventions-based routing (keep at end)
-        route(":handler/:action?").end();
-    }
-}
-```
-
-URL format: `/?event=handler.action` or `/handler/action` (with URL rewriting)
+**Critical Pattern**: `rc` = untrusted input, `prc` = trusted internal data
 
 ## 🧪 Testing Patterns
 
-Tests extend `coldbox.system.testing.BaseTestCase` with `appMapping="/app"`:
+**CRITICAL**: Tests extend `BaseTestCase` with `appMapping="/app"`:
 
 ```cfml
 component extends="coldbox.system.testing.BaseTestCase" appMapping="/app" {
 
-    function beforeAll(){
-        super.beforeAll();
-        // Global test setup
-    }
-
     function run(){
         describe("Main Handler", function(){
             beforeEach(function(currentSpec){
-                // CRITICAL: Call setup() to create fresh request context
+                // MUST call setup() to reset request context
                 setup();
             });
 
@@ -156,126 +135,175 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="/app" {
                     .toBe("Welcome to ColdBox!");
             });
 
-            it("can handle POST requests", function(){
+            it("can return RESTful data", function(){
                 var event = this.post("main.data");
                 expect(event.getRenderedContent()).toBeJSON();
-            });
-
-            it("can test relocations", function(){
-                var event = execute(event="main.doSomething");
-                expect(event.getValue("relocate_event", "")).toBe("main.index");
             });
         });
     }
 }
 ```
 
-**Key Testing Methods**:
-- `this.get(event)` / `this.post(event)` - Simulate HTTP requests
-- `execute(event)` - Execute event without HTTP simulation
-- `event.getValue(name, default, private)` - Get from rc/prc
-- `event.getHandlerResults()` - Get return value from handler
-- `event.getRenderedContent()` - Get rendered view output
+**Common Mistakes**:
+- ❌ Forgetting `setup()` in `beforeEach()` → Tests share request context
+- ❌ Wrong `appMapping` → Tests fail to find application
+- ✅ Always call `setup()` for test isolation
 
-## 💉 Dependency Injection
-
-Use WireBox annotations in components:
-
-```cfml
-component {
-    property name="userService" inject="UserService";
-    property name="wirebox" inject="wirebox";
-    property name="cachebox" inject="cachebox";
-    property name="logbox" inject="logbox";
-
-    function list(){
-        return userService.getAll();
-    }
-}
-```
-
-**Injection Shortcuts**:
-- `inject="coldbox"` - ColdBox controller
-- `inject="wirebox"` - WireBox injector
-- `inject="cachebox"` - CacheBox
-- `inject="logbox"` - LogBox
-- `inject="coldbox:setting:settingName"` - Application setting
-
-## 🔨 Build & Development Commands
+## 🛠️ Build Commands
 
 ```bash
 # Install dependencies
 box install
 
-# Start server (uses server.json config)
+# Start server
 box server start
 
-# Run tests
-box testbox run
-
 # Code formatting
-box run-script format          # Format all code
-box run-script format:check    # Check formatting
-box run-script format:watch    # Watch mode
+box run-script format              # Format all CFML
+box run-script format:check        # Check formatting
+box run-script format:watch        # Watch and auto-format
+
+# Testing
+box testbox run                    # Run all tests
+box testbox run bundles=tests.specs.integration.MainSpec
+
+# Scaffolding
+coldbox create handler name=Users actions=index,save
+coldbox create model name=UserService methods=getAll,save
+coldbox create integration-test handler=Users
 
 # Docker
-box run-script build:docker    # Build Docker image
-box run-script run:docker      # Run container
+box run-script build:docker        # Build image
+box run-script run:docker          # Run container
 ```
 
-## 📦 Java Dependencies (Optional)
+## 🎯 Configuration Patterns
 
-Add Maven dependencies to `pom.xml`:
+### Environment Variables (.env)
 
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.10.1</version>
-    </dependency>
-</dependencies>
-```
-
-Then run: `mvn install` - JARs copied to `/lib/java/` and auto-loaded by `Application.cfc`.
-
-## 🔐 Configuration Patterns
-
-### Environment Variables
-
-Copy `.env.example` to `.env` and use `getSystemSetting()`:
+The `postInstall` script auto-creates `.env` from `.env.example`. Access with `getSystemSetting()`:
 
 ```cfml
-// In /app/config/ColdBox.cfc
+// app/config/ColdBox.cfc
 variables.coldbox = {
-    appName: getSystemSetting("APPNAME", "Default App Name")
+    appName: getSystemSetting("APPNAME", "Default")
+};
+
+// In handlers/models
+var dbHost = getSystemSetting("DB_HOST", "localhost");
+```
+
+### Application Helper
+
+`/app/helpers/ApplicationHelper.cfm` is available in all handlers, views, layouts:
+
+```cfml
+<!--- app/helpers/ApplicationHelper.cfm --->
+<cfscript>
+function formatCurrency(required numeric amount){
+    return dollarFormat(arguments.amount);
+}
+</cfscript>
+```
+
+### Implicit Event Handlers
+
+Configure in `/app/config/ColdBox.cfc`:
+
+```cfml
+variables.coldbox = {
+    applicationStartHandler: "Main.onAppInit",
+    requestStartHandler: "Main.onRequestStart",
+    exceptionHandler: "main.onException"
 };
 ```
 
-### Module Installation
+## 🔄 Routing (app/config/Router.cfc)
 
-When installing modules with web assets:
+```cfml
+component {
+    function configure(){
+        // Closure routes
+        route("/healthcheck", function(event, rc, prc){
+            return "Ok!";
+        });
 
-1. `box install cbdebugger`
-2. Add alias to `server.json`:
-   ```json
-   "aliases": {
-       "/cbdebugger": "./modules/cbdebugger"
-   }
-   ```
-3. Restart server
+        // RESTful resources
+        resources("photos");
+
+        // Pattern routes
+        route("/users/:id").to("users.show");
+
+        // Route groups
+        group({prefix: "/api/v1"}, function(){
+            route("/users").to("api.users.index");
+        });
+
+        // Conventions-based (MUST be last)
+        route(":handler/:action?").end();
+    }
+}
+```
+
+## 💉 Dependency Injection (WireBox)
+
+```cfml
+component {
+    // Inject by model name
+    property name="userService" inject="UserService";
+    
+    // Inject by ID
+    property name="cache" inject="cachebox:default";
+    
+    // Inject logger
+    property name="log" inject="logbox:logger:{this}";
+    
+    // Provider injection (lazy)
+    property name="provider" inject="provider:UserService";
+}
+```
+
+**Auto-Discovery**: Models in `/app/models/` are automatically registered when `autoMapModels=true`.
 
 ## 🚨 Common Pitfalls
 
-1. **Missing Aliases**: Modules with UI assets won't work without CommandBox aliases
-2. **Test Isolation**: Always call `setup()` in `beforeEach()` for fresh request context
-3. **Private vs Public Data**: Use `prc` for handler-to-view data, never expose via URL
-4. **Application Mapping**: Test `appMapping="/app"` must match production paths
-5. **Webroot Confusion**: Public files go in `/public`, not `/app`
+1. **Missing Aliases**: Module UI assets return 404 → Add alias to `server.json`
+2. **Test Isolation**: Forgetting `setup()` → Tests mysteriously fail
+3. **appMapping**: Tests need `appMapping="/app"` to match public/Application.cfc
+4. **Webroot Confusion**: Don't put code in `/public` except static assets
+5. **Direct /app Access**: `/app/Application.cfc` abort prevents web access (security feature)
+6. **Library Paths**: box.json installs to `lib/coldbox/`, `lib/testbox/` (note the subdirs)
 
-## 🎯 When to Use This Template
+## 📚 Key Files
 
-- **Use Modern Template**: Secure environments, production apps, when you want application code outside webroot
-- **Use Default Template**: Development, simple apps, when you need everything in webroot
+- `public/Application.cfc` - Bootstrap with mappings (COLDBOX_APP_ROOT_PATH, COLDBOX_APP_MAPPING)
+- `app/Application.cfc` - Security barrier (only contains `abort;`)
+- `app/config/ColdBox.cfc` - Framework configuration
+- `app/config/Router.cfc` - URL routing
+- `server.json` - **CRITICAL** aliases for modules
+- `box.json` - Dependencies, scripts
+- `tests/Application.cfc` - Test bootstrap (mirrors public/Application.cfc)
 
-This template requires understanding of web server aliases and CommandBox configuration.
+## 🔍 Debugging
+
+```cfml
+// Enable debug in app/config/ColdBox.cfc
+variables.settings = { debugMode: true };
+
+// Dump in handlers
+writeDump(var=rc, abort=true);
+
+// Inject logger
+property name="log" inject="logbox:logger:{this}";
+log.info("Debug", rc);
+
+// TestBox debug
+debug(event.getHandlerResults());
+```
+
+## 📖 Documentation
+
+- ColdBox: https://coldbox.ortusbooks.com
+- WireBox: https://wirebox.ortusbooks.com
+- TestBox: https://testbox.ortusbooks.com
+- CommandBox: https://commandbox.ortusbooks.com
