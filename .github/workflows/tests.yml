@@ -20,7 +20,7 @@ jobs:
             engineModules: "install bx-compat-cfml,bx-esapi"
           - cfengine: "adobe@2023"
             jdkVersion: "21"
-            engineModules: "cfmp install zip"
+            engineModules: "cfpm install zip"
           - cfengine: "adobe@2025"
             jdkVersion: "21"
             engineModules: "cfpm install zip"
