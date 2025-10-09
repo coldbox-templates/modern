@@ -15,27 +15,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - cfengine: "boxlang@1"
+          - cfengine: "boxlang@be"
             jdkVersion: "21"
-            engineModules: "bx-compat-cfml,bx-esapi"
-          - cfengine: "lucee@5"
-            jdkVersion: "11"
-            engineModules: ""
-          - cfengine: "lucee@6"
-            jdkVersion: "21"
-            engineModules: ""
+            engineModules: "install bx-compat-cfml,bx-esapi"
           - cfengine: "adobe@2023"
             jdkVersion: "21"
-            engineModules: "zip"
+            engineModules: "cfmp install zip"
           - cfengine: "adobe@2025"
             jdkVersion: "21"
-            engineModules: "zip"
+            engineModules: "cfmp install zip"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           java-version: ${{ matrix.jdkVersion }}
@@ -67,7 +61,7 @@ jobs:
           box server set app.cfengine=${{ matrix.cfengine }}
           if [ -n "${{ matrix.engineModules }}" ]; then
             echo "Installing Engine Modules: ${{ matrix.engineModules }}"
-            box server set scripts.onServerInitialInstall="install ${{ matrix.engineModules }}"
+            box server set scripts.onServerInitialInstall="${{ matrix.engineModules }}"
           fi
           box server start --debug
           curl http://127.0.0.1:${{ env.WEB_PORT }}
