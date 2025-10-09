@@ -23,7 +23,7 @@ jobs:
             engineModules: "cfmp install zip"
           - cfengine: "adobe@2025"
             jdkVersion: "21"
-            engineModules: "cfmp install zip"
+            engineModules: "cfpm install zip"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
