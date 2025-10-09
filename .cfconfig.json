@@ -14,27 +14,6 @@
         }
     },
     "CFMappings":{
-        "/app":{
-            "PHYSICAL":"./app",
-			"TOPLEVEL":"false"
-        },
-        "/coldbox":{
-            "PHYSICAL":"./lib/coldbox",
-            "TOPLEVEL":"false"
-        },
-		 "/coldbox/system/exceptions":{
-            "PHYSICAL":"./lib/coldbox/system/exceptions",
-            "TOPLEVEL":"true"
-        },
-		"/modules":{
-            "PHYSICAL":"./modules"
-        },
-        "/public":{
-            "PHYSICAL":"./public"
-        },
-		"/testbox":{
-            "PHYSICAL":"./lib/testbox"
-        },
 		"/tests":{
             "PHYSICAL":"./tests"
         }
