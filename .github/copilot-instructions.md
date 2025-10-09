@@ -251,13 +251,13 @@ component {
 component {
     // Inject by model name
     property name="userService" inject="UserService";
-    
+
     // Inject by ID
     property name="cache" inject="cachebox:default";
-    
+
     // Inject logger
     property name="log" inject="logbox:logger:{this}";
-    
+
     // Provider injection (lazy)
     property name="provider" inject="provider:UserService";
 }
