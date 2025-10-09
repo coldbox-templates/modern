@@ -7,7 +7,7 @@ effective-pom.xml
 .engine/**
 
 # logs + test results
-logs/**
+app/logs/**
 tests/results/**
 
 # npm

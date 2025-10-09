@@ -13,6 +13,11 @@
             "type":"RAM"
         }
     },
+    "CFMappings":{
+		"/tests":{
+            "PHYSICAL":"${serverinfo.webroot}/../tests"
+        }
+    },
     "datasources":{
         "coldbox":{
             "bundleName":"${DB_BUNDLENAME}",

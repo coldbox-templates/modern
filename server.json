@@ -5,7 +5,9 @@
         "javaVersion":"openjdk21_jre",
         "args":"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
     },
-    "app":{},
+    "app":{
+        "cfengine":"boxlang@1"
+    },
     "web":{
         "webroot":"public",
         "rewrites":{
@@ -13,13 +15,13 @@
         },
         "aliases":{
             "/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
-			"/testsbox":"./lib/testbox/"
+            "/tests":"./tests/"
         }
     },
     "cfconfig":{
         "file":"./.cfconfig.json"
     },
     "scripts":{
-        "onServerInitialInstall":"install bx-compat-cfml,bx-esapi"
+        "onServerInstall":"install bx-esapi,bx-compat-cfml --noSave"
     }
 }
