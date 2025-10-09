@@ -37,7 +37,7 @@ component {
 			 * You can use this section to register different cache regions and map them
 			 * to different cache providers
 			 */
-			variables.caches : {
+						variables.caches : {
 				/**
 				 * --------------------------------------------------------------------------
 				 * ColdBox Template Cache
