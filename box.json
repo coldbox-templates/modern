@@ -27,9 +27,7 @@
     "devDependencies":{
         "testbox":"*",
         "commandbox-boxlang":"*",
-        "commandbox-cfformat":"*",
-		"coldbox-cli":"*",
-		"testbox-cli":"*"
+        "commandbox-cfformat":"*"
     },
     "installPaths":{
         "coldbox":"lib/coldbox/",
