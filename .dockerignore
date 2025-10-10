@@ -1,5 +1,9 @@
 # All the files to ignore from the docker image
-.vscode
-testbox
-tests
 .engine
+.github
+.vscode
+.DS_Store
+.dockerignore
+lib/testbox
+resources
+tests

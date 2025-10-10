@@ -5,7 +5,11 @@
 */
 component{
 
-	// APPLICATION CFC PROPERTIES
+	/**
+	 * --------------------------------------------------------------------------
+	 * Application Properties: Modify as you see fit!
+	 * --------------------------------------------------------------------------
+	 */
 	this.name 				= "ColdBoxTestingSuite";
 	this.sessionManagement 	= true;
 	this.sessionTimeout 	= createTimeSpan( 0, 0, 15, 0 );
@@ -14,24 +18,34 @@ component{
 	this.whiteSpaceManagement = "smart";
 	this.enableNullSupport = shouldEnableFullNullSupport();
 
-	// Create testing mapping
-	this.mappings[ "/tests" ] = getDirectoryFromPath( getCurrentTemplatePath() );
-	// Map back to its root
-	rootPath = REReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
+	/**
+	 * --------------------------------------------------------------------------
+	 * Location Mappings
+	 * --------------------------------------------------------------------------
+	 * These are pre-defined in the runtime/config/boxlang.json so they can
+	 * be reused.  You can change them here if you want.
+	 */
+	_testsRoot = getDirectoryFromPath( getCurrentTemplatePath() );
+	_root = reReplaceNoCase( _testsRoot, "(/|\\)tests", "" );
+
+	this.mappings[ "/tests" ] = _testsRoot;
 	// App Mappings
-	this.mappings[ "/app" ]     = rootPath & "app";
-	this.mappings[ "/lib" ]     = rootPath & "lib";
-	this.mappings[ "/logs" ]    = rootPath & "logs";
-	this.mappings[ "/modules" ] = rootPath & "modules";
-	this.mappings[ "/root" ]    = rootPath & "public";
-	this.mappings[ "/coldbox" ] = this.mappings[ "/lib" ] & "/coldbox";
-	this.mappings[ "/testbox" ] = this.mappings[ "/lib" ] & "/testbox";
+	this.mappings[ "/app" ]     = _root & "app";
+	this.mappings[ "/public" ]     = _root & "public";
+	this.mappings[ "/modules" ] = _root & "lib/modules";
+	this.mappings[ "/coldbox" ] = _root & "/lib/coldbox";
+	this.mappings[ "/testbox" ] = _root & "/lib/testbox";
 
 	public boolean function onRequestStart( targetPage ){
+		writeDump( var=this.mappings, top = 5, showUDFs = false );
+		abort;
 		// Set a high timeout for long running tests
 		setting requestTimeout="9999";
 		// New ColdBox Virtual Application Starter
-		request.coldBoxVirtualApp = new coldbox.system.testing.VirtualApp( appMapping = "/app" );
+		request.coldBoxVirtualApp = new coldbox.system.testing.VirtualApp(
+			appMapping = "/app",
+			webMapping = "/public"
+		);
 
 		// If hitting the runner or specs, prep our virtual app and database
 		if ( getBaseTemplatePath().replace( expandPath( "/tests" ), "" ).reFindNoCase( "(runner|specs)" ) ) {
@@ -40,9 +54,6 @@ component{
 
 		// ORM Reload for fresh results
 		if( structKeyExists( url, "fwreinit" ) ){
-			if( structKeyExists( server, "lucee" ) ){
-				pagePoolClear();
-			}
 			// ormReload();
 			request.coldBoxVirtualApp.restart();
 		}

@@ -1,7 +1,7 @@
 {
     "name":"ColdBox Modern APP Template",
     "shortDescription":"",
-    "version":"7.2.0",
+    "version":"8.0.0",
     "author":"You",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
@@ -15,20 +15,22 @@
     "contributors":[],
     "ignore":[
 		"changelog.md",
-        ".github/**"
+		".github/ISSUE_TEMPLATE",
+		".github/workflows/*",
+		".github/CONTRIBUTING.md",
+		".github/FUNDING.YML",
+		".github/PULL_REQUEST_TEMPLATE.md"
 	],
     "dependencies":{
-        "coldbox":"^7.0.0",
-        "cbdebugger":"^4.3.0+5"
+        "coldbox":"^8.0.0"
     },
     "devDependencies":{
-        "testbox":"^6.0.0",
+        "testbox":"*",
         "commandbox-boxlang":"*",
         "commandbox-cfformat":"*"
     },
     "installPaths":{
         "coldbox":"lib/coldbox/",
-        "cbdebugger":"modules/cbdebugger/",
         "testbox":"lib/testbox/"
     },
     "scripts":{
@@ -37,23 +39,10 @@
         "format":"cfformat run app/**/*.cfc,tests/specs/,*.cfc --overwrite",
         "format:check":"cfformat check app/**/*.cfc,tests/specs/,*.cfc ./.cfformat.json",
         "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'",
-        "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./Dockerfile ./",
+        "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./docker/Dockerfile ./",
         "run:docker":"!docker run -it -p 8080:8080 my-coldbox-app"
     },
     "testbox":{
         "runner":"/tests/runner.cfm"
-    },
-    "cfmigrations":{
-        "migrationsDirectory":"resources/database/migrations",
-        "schema":"${DB_SCHEMA}",
-        "connectionInfo":{
-            "bundleName":"${DB_BUNDLENAME}",
-            "bundleVersion":"${DB_BUNDLEVERSION}",
-            "password":"${DB_PASSWORD}",
-            "connectionString":"${DB_CONNECTIONSTRING}",
-            "class":"${DB_CLASS}",
-            "username":"${DB_USER}"
-        },
-        "defaultGrammar":"AutoDiscover@qb"
     }
 }

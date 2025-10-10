@@ -13,7 +13,7 @@ component {
 		 * you create the appropriate functions and define the environment in your .env or
 		 * in the `environments` struct.
 		 */
-		coldbox = {
+		variables.coldbox = {
 			// Application Setup
 			appName                  : getSystemSetting( "APPNAME", "Your app name here" ),
 			eventName                : "event",
@@ -59,7 +59,7 @@ component {
 		 * Custom Settings
 		 * --------------------------------------------------------------------------
 		 */
-		settings = {};
+		variables.settings = {};
 
 		/**
 		 * --------------------------------------------------------------------------
@@ -79,7 +79,7 @@ component {
 		 * Module Loading Directives
 		 * --------------------------------------------------------------------------
 		 */
-		modules = {
+		variables.modules = {
 			// An array of modules names to load, empty means all of them
 			include : [],
 			// An array of modules names to NOT load, empty means none
@@ -93,13 +93,13 @@ component {
 		 * By Default we log to the console, but you can add many appenders or destinations to log to.
 		 * You can also choose the logging level of the root logger, or even the actual appender.
 		 */
-		logBox = {
+		variables.logBox = {
 			// Define Appenders
 			appenders : {
 				consolelog : { class : "coldbox.system.logging.appenders.ConsoleAppender" },
 				filelog    : {
 					class      : "coldbox.system.logging.appenders.RollingFileAppender",
-					properties : { filename : "app", filePath : "/logs" }
+					properties : { filename : "app", filePath : "/app/logs" }
 				}
 			},
 			// Root Logger
@@ -113,14 +113,14 @@ component {
 		 * Layout Settings
 		 * --------------------------------------------------------------------------
 		 */
-		layoutSettings = { defaultLayout : "", defaultView : "" };
+		variables.layoutSettings = { defaultLayout : "", defaultView : "" };
 
 		/**
 		 * --------------------------------------------------------------------------
 		 * Custom Interception Points
 		 * --------------------------------------------------------------------------
 		 */
-		interceptorSettings = { customInterceptionPoints : [] };
+		variables.interceptorSettings = { customInterceptionPoints : [] };
 
 		/**
 		 * --------------------------------------------------------------------------
@@ -128,7 +128,7 @@ component {
 		 * --------------------------------------------------------------------------
 		 * Remember that the order of declaration is the order they will be registered and fired
 		 */
-		interceptors = [];
+		variables.interceptors = [];
 
 		/**
 		 * --------------------------------------------------------------------------
@@ -143,7 +143,7 @@ component {
 		 *
 		 * }
 		 */
-		moduleSettings = {};
+		variables.moduleSettings = {};
 
 		/**
 		 * --------------------------------------------------------------------------
@@ -151,7 +151,7 @@ component {
 		 * --------------------------------------------------------------------------
 		 * The available scopes are : session, client, cluster, ColdBoxCache, or a full instantiation CFC path
 		 */
-		flash = {
+		variables.flash = {
 			scope        : "session",
 			properties   : {}, // constructor properties for the flash scope implementation
 			inflateToRC  : true, // automatically inflate flash data into the RC scope
@@ -165,7 +165,7 @@ component {
 		 * App Conventions
 		 * --------------------------------------------------------------------------
 		 */
-		conventions = {
+		variables.conventions = {
 			handlersLocation : "handlers",
 			viewsLocation    : "views",
 			layoutsLocation  : "layouts",
@@ -178,87 +178,7 @@ component {
 	 * Development environment
 	 */
 	function development(){
-		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm"; // interactive bug report
-
-		// Debugger Settings
-		variables.modulesettings.cbdebugger = {
-			// This flag enables/disables the tracking of request data to our storage facilities
-			// To disable all tracking, turn this master key off
-			enabled        : true,
-			// This setting controls if you will activate the debugger for visualizations ONLY
-			// The debugger will still track requests even in non debug mode.
-			debugMode      : true,
-			// The URL password to use to activate it on demand
-			debugPassword  : "cb",
-			// Request Tracker Options
-			requestTracker : {
-				storage                      : "cachebox",
-				cacheName                    : "template",
-				trackDebuggerEvents          : false,
-				// Expand by default the tracker panel or not
-				expanded                     : false,
-				// Slow request threshold in milliseconds, if execution time is above it, we mark those transactions as red
-				slowExecutionThreshold       : 1000,
-				// How many tracking profilers to keep in stack: Default is to monitor the last 20 requests
-				maxProfilers                 : 50,
-				// If enabled, the debugger will monitor the creation time of CFC objects via WireBox
-				profileWireBoxObjectCreation : false,
-				// Profile model objects annotated with the `profile` annotation
-				profileObjects               : true,
-				// If enabled, will trace the results of any methods that are being profiled
-				traceObjectResults           : false,
-				// Profile Custom or Core interception points
-				profileInterceptions         : false,
-				// By default all interception events are excluded, you must include what you want to profile
-				includedInterceptions        : [],
-				// Control the execution timers
-				executionTimers              : {
-					expanded           : true,
-					// Slow transaction timers in milliseconds, if execution time of the timer is above it, we mark it
-					slowTimerThreshold : 250
-				},
-				// Control the coldbox info reporting
-				coldboxInfo : { expanded : false },
-				// Control the http request reporting
-				httpRequest : {
-					expanded        : false,
-					// If enabled, we will profile HTTP Body content, disabled by default as it contains lots of data
-					profileHTTPBody : false
-				}
-			},
-			// ColdBox Tracer Appender Messages
-			tracers     : { enabled : true, expanded : false },
-			// Request Collections Reporting
-			collections : {
-				// Enable tracking
-				enabled      : false,
-				// Expanded panel or not
-				expanded     : false,
-				// How many rows to dump for object collections
-				maxQueryRows : 50,
-				// How many levels to output on dumps for objects
-				maxDumpTop   : 5
-			},
-			// CacheBox Reporting
-			cachebox : { enabled : false, expanded : false },
-			// Modules Reporting
-			modules  : { enabled : false, expanded : false },
-			// Quick and QB Reporting
-			qb       : {
-				enabled   : false,
-				expanded  : false,
-				// Log the binding parameters
-				logParams : true
-			},
-			// cborm Reporting
-			cborm : {
-				enabled   : false,
-				expanded  : false,
-				// Log the binding parameters
-				logParams : true
-			},
-			async : { enabled : true, expanded : false }
-		};
+		variables.coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm"; // interactive bug report
 	}
 
 }

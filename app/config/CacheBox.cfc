@@ -9,7 +9,7 @@ component {
 		 * CacheBox Configuration (https://cachebox.ortusbooks.com)
 		 * --------------------------------------------------------------------------
 		 */
-		cacheBox = {
+		variables.cacheBox = {
 			/**
 			 * --------------------------------------------------------------------------
 			 * Default Cache Configuration

@@ -1,7 +1,12 @@
 {
-    "name":"ColdBoxRocks",
+    "name":"coldbox-modern-template",
     "JVM":{
-        "heapSize":"512"
+        "heapSize":"512",
+        "javaVersion":"openjdk21_jre",
+        "args":"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+    },
+    "app":{
+        "cfengine":"boxlang@be"
     },
     "web":{
         "webroot":"public",
@@ -9,10 +14,14 @@
             "enable":true
         },
         "aliases":{
-            "/modules/cbdebugger":"../modules/cbdebugger",
-            "/coldbox/system/exceptions":"../coldbox/system/exceptions/",
-            "/testbox":"../testbox/",
-            "/tests":"../tests/"
+            "/coldbox/system/exceptions":"./lib/coldbox/system/exceptions/",
+            "/tests":"./tests/"
         }
+    },
+    "cfconfig":{
+        "file":"./.cfconfig.json"
+    },
+    "scripts":{
+        "onServerInstall":"install bx-esapi,bx-compat-cfml --noSave"
     }
 }
