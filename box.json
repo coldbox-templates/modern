@@ -1,7 +1,7 @@
 {
     "name":"ColdBox Modern APP Template",
     "shortDescription":"",
-    "version":"8.0.0",
+    "version":"8.1.0",
     "author":"You",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
@@ -14,13 +14,13 @@
     },
     "contributors":[],
     "ignore":[
-		"changelog.md",
-		".github/ISSUE_TEMPLATE",
-		".github/workflows/*",
-		".github/CONTRIBUTING.md",
-		".github/FUNDING.YML",
-		".github/PULL_REQUEST_TEMPLATE.md"
-	],
+        "changelog.md",
+        ".github/ISSUE_TEMPLATE",
+        ".github/workflows/*",
+        ".github/CONTRIBUTING.md",
+        ".github/FUNDING.YML",
+        ".github/PULL_REQUEST_TEMPLATE.md"
+    ],
     "dependencies":{
         "coldbox":"^8.0.0"
     },
