@@ -21,8 +21,10 @@
     "cfconfig":{
         "file":"./.cfconfig.json"
     },
-    "onServerInstall":[
-        "assertEqual \\${serverinfo.engineName} boxlang && install bx-esapi,bx-compat-cfml; exit 0",
-        "assertEqual \\${serverinfo.engineName} lucee && cfconfig cfmapping save /tests {web-root-directory}/../tests; exit 0"
-    ]
+	"scripts":{
+        "onServerInstall":[
+            "assertEqual \\${serverinfo.engineName} boxlang && install bx-esapi,bx-compat-cfml; exit 0",
+            "assertEqual \\${serverinfo.engineName} lucee && cfconfig cfmapping save /tests {web-root-directory}/../tests; exit 0"
+        ]
+	}
 }
