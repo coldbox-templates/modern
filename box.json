@@ -33,6 +33,9 @@
         "coldbox":"lib/coldbox/",
         "testbox":"lib/testbox/"
     },
+    "installPathConventions":{
+        "modules":"lib/modules"
+    },
     "scripts":{
         "postPublish":"!git push origin --tags",
         "postInstall":"pathExists .env || cp .env.example .env",
