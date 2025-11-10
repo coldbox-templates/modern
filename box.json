@@ -1,6 +1,6 @@
 {
     "name":"ColdBox Modern CFML Application Template",
-    "version":"8.2.0",
+    "version":"8.3.0",
     "author":"You",
     "shortDescription":"A modern ColdBox CFML application template with best practices and tools integrated.",
     "location":"forgeboxStorage",
@@ -39,12 +39,9 @@
     },
     "scripts":{
         "postInstall":"pathExists .env || cp .env.example .env",
-
-		"format":"cfformat run app/,tests/specs/,*.cfc --overwrite --verbose",
+        "format":"cfformat run app/,tests/specs/,*.cfc --overwrite --verbose",
         "format:check":"cfformat check app/,tests/specs/,*.cfc ./.cfformat.json --verbose",
         "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'",
-
-
         "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./docker/Dockerfile ./",
         "run:docker":"!docker run -it -p 8080:8080 my-coldbox-app"
     },
