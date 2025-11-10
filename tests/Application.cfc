@@ -27,15 +27,37 @@ component{
 	 */
 	_testsRoot = getDirectoryFromPath( getCurrentTemplatePath() );
 	_root = reReplaceNoCase( _testsRoot, "(/|\\)tests", "" );
+	_libRoot    = _root & "/lib/java";
 
-	this.mappings[ "/tests" ] = _testsRoot;
 	// App Mappings
+	this.mappings[ "/tests" ] = _testsRoot;
 	this.mappings[ "/app" ]     = _root & "app";
 	this.mappings[ "/public" ]     = _root & "public";
 	this.mappings[ "/modules" ] = _root & "lib/modules";
 	this.mappings[ "/coldbox" ] = _root & "/lib/coldbox";
 	this.mappings[ "/testbox" ] = _root & "/lib/testbox";
 
+	/**
+	 * --------------------------------------------------------------------------
+	 * App Class Loader
+	 * --------------------------------------------------------------------------
+	 */
+	this.javaSettings = {
+		loadPaths               : [ _libRoot ],
+		loadColdFusionClassPath : true,
+		reloadOnChange          : false
+	};
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * ORM + Datasource Settings
+	 * --------------------------------------------------------------------------
+	 */
+	this.datasource = "coldbox"
+
+	/**
+	 * Request start for virtual app testing
+	 */
 	public boolean function onRequestStart( targetPage ){
 		// Set a high timeout for long running tests
 		setting requestTimeout="9999";
@@ -59,10 +81,18 @@ component{
 		return true;
 	}
 
+	/**
+	 * Request end for virtual app testing
+	 */
 	public void function onRequestEnd( required targetPage ) {
 		request.coldBoxVirtualApp.shutdown();
 	}
 
+	/**
+	 * Enables full null support based on the FULL_NULL environment variable.
+	 *
+	 * @return boolean
+	 */
 	private boolean function shouldEnableFullNullSupport() {
         var system = createObject( "java", "java.lang.System" );
         var value = system.getEnv( "FULL_NULL" );

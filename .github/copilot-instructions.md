@@ -19,8 +19,7 @@ This is a ColdBox HMVC framework template with a **security-first architecture**
 ├── views/            - HTML templates
 ├── layouts/          - Page layouts
 ├── helpers/          - Application helper functions
-├── interceptors/     - Event interceptors
-└── modules/          - Application modules (HMVC)
+└── interceptors/     - Event interceptors
 
 /public/               - Document root (web-accessible)
 ├── Application.cfc   - Bootstrap that maps to /app
@@ -29,7 +28,8 @@ This is a ColdBox HMVC framework template with a **security-first architecture**
 
 /lib/                  - Framework dependencies
 ├── coldbox/          - ColdBox framework
-└── testbox/          - TestBox testing framework
+├── testbox/          - TestBox testing framework
+└── modules/          - CommandBox-installed modules (cbdebugger, cbswagger, etc.)
 
 /tests/                - Test suites
 └── specs/            - BDD test specifications
@@ -66,8 +66,8 @@ This template **REQUIRES** CommandBox aliases in `server.json` to expose interna
 
 ```json
 "aliases": {
-    "/cbdebugger": "./modules/cbdebugger/",
-    "/cbswagger": "./modules/cbswagger/"
+    "/cbdebugger": "./lib/modules/cbdebugger/",
+    "/cbswagger": "./lib/modules/cbswagger/"
 }
 ```
 

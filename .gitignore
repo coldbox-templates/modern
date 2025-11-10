@@ -17,3 +17,7 @@ yarn-error.log
 
 ## Global Libs
 lib/**
+!lib/java/
+!lib/java/.gitkeep
+!lib/modules/
+!lib/modules/.gitkeep

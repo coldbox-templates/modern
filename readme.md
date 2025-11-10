@@ -114,7 +114,6 @@ app/
 ├── 🎨 layouts/              # View layouts
 ├── 📝 logs/                 # Application logs
 ├── 🏗️ models/               # Business logic models
-├── 📦 modules/              # Application-specific modules (optional)
 └── 👁️ views/                # View templates
 ```
 
@@ -139,8 +138,8 @@ Framework and dependency storage managed by CommandBox:
 lib/
 ├── coldbox/                 # ColdBox framework files
 ├── testbox/                 # TestBox testing framework
-├── java/                    # Java JAR dependencies (optional)
-└── modules/                 # CommandBox-installed modules
+├── modules/                 # CommandBox-installed modules (cbdebugger, cbswagger, etc.)
+└── java/                    # Java JAR dependencies (optional)
 ```
 
 ### 🧪 Tests (`/tests/`)
@@ -199,7 +198,7 @@ box install cbdebugger
 
 # Add the alias to server.json
 "aliases": {
-    "/cbdebugger": "./modules/cbdebugger",
+    "/cbdebugger": "./lib/modules/cbdebugger",
     "/coldbox/system/exceptions": "./lib/coldbox/system/exceptions/",
     "/tests": "./tests/"
 }
@@ -553,7 +552,7 @@ Apache License, Version 2.0.
 
 ```json
 "aliases": {
-    "/cbdebugger": "./modules/cbdebugger"
+    "/cbdebugger": "./lib/modules/cbdebugger"
 }
 ```
 
