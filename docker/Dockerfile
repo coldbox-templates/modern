@@ -9,14 +9,14 @@
 
 # We pull the latest image, you can change this to a specific tag or CFML engine, which we recommend.
 # https://hub.docker.com/r/ortussolutions/commandbox
-FROM ortussolutions/commandbox
+FROM ortussolutions/commandbox:boxlang
 
 # Metadata
-LABEL maintainer "Ortus Solutions <info@ortussolutions.com>"
-LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
+LABEL maintainer="Ortus Solutions <info@ortussolutions.com>"
+LABEL repository="https://github.com/Ortus-Solutions/docker-commandbox"
 
 # ColdBox Healthcheck
-ENV HEALTHCHECK_URI "http://127.0.0.1:${PORT}/healthcheck"
+ENV HEALTHCHECK_URI="http://127.0.0.1:${PORT}/healthcheck"
 
 # Copy application files to root - Uses .dockerignore to ignore files
 COPY ./ ${APP_DIR}/
@@ -28,4 +28,4 @@ RUN cd ${APP_DIR} && box install --production
 RUN ${BUILD_DIR}/util/warmup-server.sh
 
 # Run it
-CMD $BUILD_DIR/run.sh
+CMD ["/bin/bash", "-c", "$BUILD_DIR/run.sh"]

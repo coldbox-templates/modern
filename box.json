@@ -1,8 +1,8 @@
 {
-    "name":"ColdBox Modern APP Template",
-    "shortDescription":"",
+    "name":"ColdBox Modern CFML Application Template",
     "version":"8.2.0",
     "author":"You",
+    "shortDescription":"A modern ColdBox CFML application template with best practices and tools integrated.",
     "location":"forgeboxStorage",
     "slug":"cbtemplate-modern",
     "createPackageDirectory":false,
@@ -12,7 +12,6 @@
         "type":"",
         "url":""
     },
-    "contributors":[],
     "ignore":[
         "changelog.md",
         ".github/ISSUE_TEMPLATE",
@@ -26,6 +25,7 @@
     },
     "devDependencies":{
         "testbox":"*",
+		"route-visualizer":"*",
         "commandbox-boxlang":"*",
         "commandbox-cfformat":"*"
     },

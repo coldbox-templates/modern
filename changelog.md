@@ -9,9 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Improved `robots.txt` file
+- Added `modules` to the `lib` folder for easier module management
+- Added `java` folder inside `lib` for encapsulation of Java libraries
+- Lucee /tests folder for module testing
+- Improved Docker setup and enhanced cmds
+
+### Fixed
+
+- Tests app did not have datasource, java settings, and missing mappings.
+
 ## [8.1.0] - 2025-10-11
 
+### Added
+
+- Debugging Updates
+
+### Fixed
+
+- Removed dumps and aborts left over from testing.
+
 ## [8.0.0] - 2025-10-10
+
+- First ColdBox 8 Updates
 
 [unreleased]: https://github.com/coldbox-templates/modern/compare/v8.1.0...HEAD
 [8.1.0]: https://github.com/coldbox-templates/modern/compare/v8.0.0...v8.1.0
