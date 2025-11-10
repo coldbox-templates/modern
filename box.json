@@ -39,9 +39,12 @@
     },
     "scripts":{
         "postInstall":"pathExists .env || cp .env.example .env",
-        "format":"cfformat run /app,/tests/specs,*.cfc,*.bx --overwrite",
-        "format:check":"cfformat check /app,/tests/specs,*.cfc,*.bx ./.cfformat.json",
-        "format:watch":"cfformat watch path='/app,/tests/specs,*.cfc,*.bx' settingsPath='.cfformat.json'",
+
+		"format":"cfformat run app/,tests/specs/,*.cfc --overwrite --verbose",
+        "format:check":"cfformat check app/,tests/specs/,*.cfc ./.cfformat.json --verbose",
+        "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'",
+
+
         "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./docker/Dockerfile ./",
         "run:docker":"!docker run -it -p 8080:8080 my-coldbox-app"
     },
