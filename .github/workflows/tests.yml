@@ -15,6 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - cfengine: "boxlang@1"
+            jdkVersion: "21"
+            engineModules: "install bx-compat-cfml,bx-esapi"
           - cfengine: "boxlang@be"
             jdkVersion: "21"
             engineModules: "install bx-compat-cfml,bx-esapi"

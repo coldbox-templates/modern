@@ -1,0 +1,2 @@
+# This file ensures the lib/java directory exists in the repository
+# Java JAR dependencies will be installed here by Maven

@@ -1,0 +1,2 @@
+# This file ensures the lib/modules directory exists in the repository
+# CommandBox-installed modules (cbdebugger, cbswagger, etc.) will be installed here

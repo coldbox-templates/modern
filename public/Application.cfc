@@ -27,7 +27,7 @@ component {
 	 * be reused.  You can change them here if you want.
 	 */
 	_publicRoot = getDirectoryFromPath( getCurrentTemplatePath() );
-	_libRoot    = reReplaceNoCase( _publicRoot, "(/|\\)public", "/lib/java" );
+	_libRoot    = reReplaceNoCase( _publicRoot, "(/|\\)public", "lib/java" );
 	_root = reReplaceNoCase( _publicRoot, "(/|\\)public", "" );
 
 	this.mappings[ "/public" ]     = _publicRoot;
